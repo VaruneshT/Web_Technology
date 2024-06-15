@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>EB Bill Calculator</title>
+
+    <!--ViewPort-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--BOOTSTRAP CSS File-->
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <!--BOOTSTRAP JS File-->
+    <script src="bootstrap.bundle.min.js"></script>
+
+    <!--External Stylesheet-->
+    <link rel="stylesheet" href="EB_Bill.css">
+
+    <!--Internal Stylesheet-->
+    <style>
+        .i1 {
+            width: 50px; 
+            height: 50px;
+            float: left;
+            margin-right: 5px;
+            margin-top: 5px; 
+        }
+
+        .billAmount {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: blue;
+            padding: 10px; 
+        }
+    </style>
+</head>
+
+<!--Body-->
+<body>
+    <div class="div1">
+        <a href="https://www.tangedco.org/en/tangedco/" target="_blank">
+            <img src="logo.jpeg" alt="TANGEDC0" class="i1">
+        </a>
+        <h1 class="he1">
+            <a href="https://www.tangedco.org/en/tangedco/">TANGEDC0</a>        
+        </h1>
+        <p class="p1">TAMILNADU GENERATION AND DISTRIBUTION CORPORATION LTD</p>
+    </div>
+
+    <div>
+        <h2 class="he2">Bill Calculator</h2>
+    </div>
+
+    <!--FORM-->
+    <div class="div2">
+        <form id="billForm">
+
+            <!--Customer Name-->
+            <label for="uname"><b>Customer Name :</b></label>
+            <input type="text" name="uname" id="uname" required>
+            <br><br>
+
+            <!--Customer ID-->
+            <label for="uid"><b>Customer ID :</b></label>
+            <input type="number" name="id" id="uid" required>
+            <br><br>
+
+            <!--Radio-->
+            <!--Area Type-->
+            <label><b>Type of Area :</b></label><br>
+            <label for="type1"><input type="radio" name="area_type" id="type1" value="urban" required> URBAN</label>
+            <label for="type2"><input type="radio" name="area_type" id="type2" value="rural" required> RURAL</label>
+            <br><br>
+
+            <!--Selection-->
+            <!--Connection Type-->
+            <label for="use"><b>Type Of Connection :</b></label>
+            <select name="Use Type" id="use" required>
+                <option value="">Choose option</option>
+                <option value="domestic">Domestic</option>
+                <option value="commercial">Commercial</option>
+            </select>
+            <br><br>
+
+            <!--Last Month Reading-->
+            <label for="last"><b>Last Month Reading :</b></label>
+            <input type="number" name="last" id="last" required>
+            <br><br>
+
+            <!--Current Month Reading-->
+            <label for="current"><b>Current Month Reading :</b></label>
+            <input type="number" name="current" id="current" required>
+            <br><br>
+
+            <input type="submit" value="Calculate Bill" class="b1">
+            <input type="reset" value="Reset" class="b1">
+        </form>
+        
+        <div id="billAmountDisplay" class="billAmount"></div>
+    </div>
+
+    <!--JavaScript File-->
+    <script>
+        document.getElementById('billForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const lastReading = parseFloat(document.getElementById('last').value);
+            const currentReading = parseFloat(document.getElementById('current').value);
+
+            const unitsConsumed = currentReading - lastReading;
+
+            let billAmount = 0;
+            if (unitsConsumed <= 100) {
+                billAmount = 0;
+            } else if (unitsConsumed <= 200) {
+                billAmount = (unitsConsumed - 100) * 1.5;
+            } else if (unitsConsumed <= 500) {
+                billAmount = 100 * 1.5 + (unitsConsumed - 200) * 3;
+            } else {
+                billAmount = 100 * 1.5 + 300 * 3 + (unitsConsumed - 500) * 6.6;
+            }
+
+            const billAmountDisplay = document.getElementById('billAmountDisplay');
+            billAmountDisplay.textContent = `Your bill amount is Rs. ${billAmount.toFixed(2)}`;
+        });
+    </script>
+    
+</body>
+</html>

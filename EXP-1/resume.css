@@ -1,0 +1,28 @@
+#p1{
+    font-size: 10px;
+    color: goldenrod;
+    font-style: italic;
+    text-align: right;
+}
+
+#ul1{
+    font-family:'Courier New', Courier, monospace;
+
+}
+
+.bg1{
+    background-image: url(bg.jpeg );
+    background-size: cover;
+}
+
+#tr1{
+    background-color: gray;
+}
+
+#tr2{
+    background-color: lightgray;
+}
+
+.tr3{
+    background-color: antiquewhite;
+}
